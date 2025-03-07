@@ -70,7 +70,12 @@
 	<h4>Météo</h4>
 	</div>
 	
-	<div id="petit-cadran"></div>
+	<div id="petit-cadran">
+		<img src="horizon_back.png" id="background">
+		<img src="horizon_circle.png" id="cercle">
+		<img src="horizon_frame.png" id="fond_cercle">
+		<img src="horizon_mech.png" id="fleche">
+	</div>
 
 	<div id="cadran-1">
 		<div id="circle"></div>
@@ -122,7 +127,7 @@ const camera = new THREE.PerspectiveCamera(CAM_FOV, view.clientWidth / view.clie
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ canvas: view, antialias: true });
 const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry( 10000, 10000 ),
+    new THREE.PlaneGeometry( 1000, 1000 ),
     new THREE.MeshStandardMaterial( { color: COLOR_GROUND } )
 );
 const light = new THREE.AmbientLight(COLOR_LIGHT);
