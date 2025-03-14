@@ -16,6 +16,11 @@ const light = new THREE.AmbientLight(COLOR_LIGHT);
 const controls = new FlyControls( camera, document.body );
 const clock = new THREE.Clock();
 
+const back = document.getElementById('background');
+const cercle = document.getElementById('cercle');
+const fond = document.getElementById('fond_cercle');
+const fleche = document.getElementById('fleche');
+
 controls.dragToLook = true;
 controls.rollSpeed = ROLL_SPEED;
 
@@ -29,5 +34,9 @@ renderer.setAnimationLoop(()=>{
     const delta = clock.getDelta();
 
     controls.update( delta );
+    const pitch = 1.41;
+    const roll = Math.PI/12;
+    back.style.transformation = 'translateY(pitch%) rotate(rollrad)';
+    cercle.style.transformation = 'rotate(rollrad)';
     renderer.render( scene, camera );
 });
