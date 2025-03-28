@@ -39,7 +39,6 @@ camera.position.y = 100;
 
 loader.load('asset/tree_default', (obj) => {
 
-    
     // Au besoin, redimensionner l'objet
 
     obj.scale.set(10, 20, 10); // Ici : x2 en hauteur
@@ -56,9 +55,54 @@ loader.load('asset/tree_default', (obj) => {
         // L'ajouter dans la scène
         scene.add(tmp);
     }
+});
 
-      
+loader.load('asset/tree_default_fall', (obj) => {    
 
+    obj.scale.set(10, 20, 10); 
+    
+    for(let i = 0; i < (50); i++)
+    {
+        const tmp = obj.clone();
+
+        tmp.position.x = Math.random()*1000 - 500;
+        tmp.position.z = Math.random()*1000 - 500;
+        tmp.position.y = 0;
+     
+        scene.add(tmp);
+    }
+});
+
+loader.load('asset/rock_largeA', (obj) => {    
+
+    obj.scale.set(10, 20, 10); 
+    
+    for(let i = 0; i < (50); i++)
+    {
+        const tmp = obj.clone();
+
+        tmp.position.x = Math.random()*1000 - 500;
+        tmp.position.z = Math.random()*1000 - 500;
+        tmp.position.y = 0;
+     
+        scene.add(tmp);
+    }
+});
+
+loader.load('asset/tent_detailedOpen', (obj) => {    
+
+    obj.scale.set(10, 20, 10); 
+    
+    for(let i = 0; i < (10); i++)
+    {
+        const tmp = obj.clone();
+
+        tmp.position.x = Math.random()*1000 - 500;
+        tmp.position.z = Math.random()*1000 - 500;
+        tmp.position.y = 0;
+     
+        scene.add(tmp);
+    }
 });
 
 renderer.setAnimationLoop(()=>{
