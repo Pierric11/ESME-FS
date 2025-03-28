@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import { FlyControls } from 'three/addons/controls/FlyControls.js'; 
+//import { FlyControls } from 'three/addons/controls/FlyControls.js'; 
+import { Utils3dLoader } from './js/Utils3d.js';
+import { PlaneControls } from './js/PlaneControls.js';
 
 const CAM_FOV = 60, CAM_NEAR = 0.1, CAM_FAR = 1000;
 const COLOR_SKY = 0x5dade2, COLOR_GROUND = 0x219313 , COLOR_LIGHT = 0xfdfefe;
@@ -14,7 +16,11 @@ const ground = new THREE.Mesh(
     new THREE.MeshStandardMaterial( { color: COLOR_GROUND } )
 );
 const light = new THREE.AmbientLight(COLOR_LIGHT);
-const controls = new FlyControls( camera, document.body );
+
+const loader = new Utils3dLoader();
+
+
+const controls = new PlaneControls( camera );
 const clock = new THREE.Clock();
 
 const back = document.getElementById('background');
@@ -31,13 +37,47 @@ scene.add( ground );
 scene.add( light );
 camera.position.y = 100;
 
+loader.load('asset/tree_default', (obj) => {
+
+    
+    // Au besoin, redimensionner l'objet
+
+    obj.scale.set(10, 20, 10); // Ici : x2 en hauteur
+
+    // Le placer
+    for(let i = 0; i < 100; i++)
+    {
+        // Le cloner si il est réutilisé
+        const tmp = obj.clone();
+
+        tmp.position.x = Math.random()*1000 - 500;
+        tmp.position.z = Math.random()*1000 - 500;
+        tmp.position.y = 0;
+        // L'ajouter dans la scène
+        scene.add(tmp);
+    }
+
+      
+
+});
+
 renderer.setAnimationLoop(()=>{
     const delta = clock.getDelta();
 
     controls.update( delta );
-    const pitch = 1.41;
-    const roll = Math.PI/12;
-    back.style.transformation = `translateY(${pitch}%) rotate(${roll}rad)`;
-    cercle.style.transformation = `rotate(${roll}rad)`;
+    
+/*    const up = new THREE.Vector3(0, 1, 0);
+    const front = new THREE.Vector3(0, 0, -1);
+    cam_up = up.clone().applyQuaternion(camera.quaternion);
+    cam_front = front.clone().applyQuaternion(camera.quaternion);
+    cam_right = front.clone().cross(up)
+
+    const pitch = (cam_front**2/Math.sqrt(cam_front.x*cameram_fron+cam_front**2))*47;
+    const roll = Math.atan(2)*(cam_right.dot(up),camupt.dot(up));*/
+    const roll = controls.getRoll();
+    const pitch = controls.getPitchRate();
+
+    back.style.transform = `translateY(${pitch*47}%) rotate(${roll}rad)`;
+    cercle.style.transform = `rotate(${roll}rad)`;
     renderer.render( scene, camera );
 });
