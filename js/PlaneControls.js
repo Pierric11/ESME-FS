@@ -23,6 +23,7 @@ class PlaneControls extends Controls {
 		this._moveState = { 
             pitchUp: 0, pitchDown: 0, 
             rollLeft: 0, rollRight: 0,
+			speedup: 0, speeddown: 0,
         };
 		this._moveVector = new Vector3( 0, 0, 0 );
 		this._rotationVector = new Vector3( 0, 0, 0 );
@@ -49,9 +50,11 @@ class PlaneControls extends Controls {
 		if ( this.enabled === false ) return;
 
 		const object = this.object;
-
+		
+		this.movementSpeed += this.accel * delta * 10;
 		const moveMult = delta * this.movementSpeed;
 		const rotMult = delta * this.rollSpeed;
+		
 
 		object.translateX( this._moveVector.x * moveMult );
 		object.translateY( this._moveVector.y * moveMult );
@@ -91,8 +94,11 @@ class PlaneControls extends Controls {
             case 'KeyW': this._moveState.pitchDown = value; break;
             case 'KeyA': this._moveState.rollLeft = value; break;
             case 'KeyD': this._moveState.rollRight = value; break;
-			
+			case 'Space': this._moveState.speedup = value; break;
+			case 'ControlLeft': this._moveState.speeddown = value; break;	
         }
+
+		this.accel = -this._moveState.speeddown + this._moveState.speedup;
 		this._moveVector.x = 0;
 		this._moveVector.y = 0;
 		this._moveVector.z = -1;

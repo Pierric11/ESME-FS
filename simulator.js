@@ -35,7 +35,7 @@ scene.background = new THREE.Color(COLOR_SKY);
 ground.rotation.x = - Math.PI / 2;
 scene.add( ground );
 scene.add( light );
-camera.position.y = 100;
+camera.position.y = 10;
 
 loader.load('asset/tree_default', (obj) => {
 
