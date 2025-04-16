@@ -35,7 +35,7 @@ scene.background = new THREE.Color(COLOR_SKY);
 ground.rotation.x = - Math.PI / 2;
 scene.add( ground );
 scene.add( light );
-camera.position.y = 10;
+camera.position.y = 100;
 
 loader.load('asset/tree_default', (obj) => {
 
@@ -99,6 +99,70 @@ loader.load('asset/tent_detailedOpen', (obj) => {
 
         tmp.position.x = Math.random()*1000 - 500;
         tmp.position.z = Math.random()*1000 - 500;
+        tmp.position.y = 0;
+     
+        scene.add(tmp);
+    }
+});
+
+loader.load('asset/flower_purpleA', (obj) => {    
+
+    obj.scale.set(10, 20, 10); 
+    
+    for(let i = 0; i < (200); i++)
+    {
+        const tmp = obj.clone();
+
+        tmp.position.x = Math.random()*1000 - 500;
+        tmp.position.z = Math.random()*1000 - 500;
+        tmp.position.y = 0;
+     
+        scene.add(tmp);
+    }
+});
+
+loader.load('asset/flower_yellowB', (obj) => {    
+
+    obj.scale.set(10, 20, 10); 
+    
+    for(let i = 0; i < (200); i++)
+    {
+        const tmp = obj.clone();
+
+        tmp.position.x = Math.random()*1000 - 500;
+        tmp.position.z = Math.random()*1000 - 500;
+        tmp.position.y = 0;
+     
+        scene.add(tmp);
+    }
+});
+
+loader.load('asset/carpeXL', (obj) => {    
+
+    obj.scale.set(1, 1, 1); 
+    
+    for(let i = 0; i < (1); i++)
+    {
+        const tmp = obj.clone();
+
+        tmp.position.x = -100;
+        tmp.position.z = -300;
+        tmp.position.y = -10;
+     
+        scene.add(tmp);
+    }
+});
+
+loader.load('asset/KarTech', (obj) => {    
+
+    obj.scale.set(0.1, 0.1, 0.1); 
+    
+    for(let i = 0; i < (1); i++)
+    {
+        const tmp = obj.clone();
+
+        tmp.position.x = 100;
+        tmp.position.z = -300;
         tmp.position.y = 0;
      
         scene.add(tmp);

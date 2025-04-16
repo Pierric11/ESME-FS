@@ -24,7 +24,10 @@ class PlaneControls extends Controls {
             pitchUp: 0, pitchDown: 0, 
             rollLeft: 0, rollRight: 0,
 			speedup: 0, speeddown: 0,
+			yawLeft: 0, yawRight: 0 ,
         };
+		this.yaw = 0;
+		this.accel = 0;
 		this._moveVector = new Vector3( 0, 0, 0 );
 		this._rotationVector = new Vector3( 0, 0, 0 );
 		this._lastQuaternion = new Quaternion();
@@ -51,6 +54,7 @@ class PlaneControls extends Controls {
 
 		const object = this.object;
 		
+		//this.yawMult += this.yaw * delta;
 		this.movementSpeed += this.accel * delta * 10;
 		const moveMult = delta * this.movementSpeed;
 		const rotMult = delta * this.rollSpeed;
@@ -95,10 +99,13 @@ class PlaneControls extends Controls {
             case 'KeyA': this._moveState.rollLeft = value; break;
             case 'KeyD': this._moveState.rollRight = value; break;
 			case 'Space': this._moveState.speedup = value; break;
-			case 'ControlLeft': this._moveState.speeddown = value; break;	
+			case 'ControlLeft': this._moveState.speeddown = value; break;
+			case 'KeyQ': this._moveState.yawLeft = value; break;
+			case 'KeyE': this._moveState.yawRight = value; break;
         }
 
-		this.accel = -this._moveState.speeddown + this._moveState.speedup;
+		this.yaw = - this._moveState.yawLeft + this._moveState.yawRight;
+		this.accel = - this._moveState.speeddown + this._moveState.speedup;
 		this._moveVector.x = 0;
 		this._moveVector.y = 0;
 		this._moveVector.z = -1;
